@@ -1,4 +1,10 @@
+/*================================================================
+=======================     REACTORES       ======================
+==================================================================
 
+READ: https://omegaup.com/arena/problem/Reactores#problems
+
+*/
 #include <iostream>
 #include <vector>
 #include <bitset>
