@@ -10,7 +10,7 @@
 ## C++ Tips
 
 ### Input / Output Performance
-```
+```cpp
 // No merge cin/cout with scanf/printf
 ios_base::sync_with_stdio(0);
 std::ios::sync_with_stdio(0); 	
@@ -18,6 +18,5 @@ std::ios::sync_with_stdio(0);
 // This unties cin from cout
 cin.tie(NULL);	
 ```
-
 
 ## Contests
