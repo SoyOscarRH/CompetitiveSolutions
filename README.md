@@ -13,10 +13,10 @@
 ```cpp
 // No merge cin/cout with scanf/printf
 ios_base::sync_with_stdio(0);
-std::ios::sync_with_stdio(0); 	
+std::ios::sync_with_stdio(0);   
 
 // This unties cin from cout
-cin.tie(NULL);	
+cin.tie(NULL);  
 ```
 
 ### Read Intergers
@@ -24,10 +24,10 @@ cin.tie(NULL);
 You can use this to read char by char
 ```cpp
 template <class T>  
-inline void getNumber(T &Number) {										//Super cool way to read ints
+inline void getNumber(T &Number) {                                      //Super cool way to read ints
     
     Number = 0;                                                         //Set to 0
-    T NumberSign = 1;                                       			//Sign all ok
+    T NumberSign = 1;                                                   //Sign all ok
     char CurrentChar = getchar_unlocked();                              //Read a char
  
     while (CurrentChar < '0' or CurrentChar > '9') {                    //If we are not reading numbers
