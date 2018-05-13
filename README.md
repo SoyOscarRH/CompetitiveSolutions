@@ -24,7 +24,7 @@ cin.tie(NULL);
 You can use this to read char by char
 ```cpp
 template <class T>  
-inline void getNumber(T &Number) {                                      //Super cool way to read ints
+inline void GetNumber(T &Number) {                                      //Super cool way to read ints
     
     Number = 0;                                                         //Set to 0
     T NumberSign = 1;                                                   //Sign all ok
@@ -48,11 +48,11 @@ inline void getNumber(T &Number) {                                      //Super 
 Now you just do something like:
 ```cpp
 long long int Size;
-getNumber<long long int>(Size);
+GetNumber<long long int>(Size);
 
 long long int Data[Size];
 for (int i = 0; i < Size; ++i) 
-    getNumber<int>(Data[i]);
+    GetNumber<int>(Data[i]);
 ```
 
 
