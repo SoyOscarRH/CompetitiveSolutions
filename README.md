@@ -16,7 +16,8 @@ ios_base::sync_with_stdio(0);
 std::ios::sync_with_stdio(0);   
 
 // This unties cin from cout
-cin.tie(NULL);  
+cin.tie(NULL); 
+cout.tie(NULL);  
 ```
 
 ### Read Intergers
@@ -36,7 +37,7 @@ inline void GetNumber(T &Number) {                                      //Super 
     }
 
     while (CurrentChar >= '0' and CurrentChar <= '9') {                 //While we read numbers
-        Number = (Number << 3) + (Number << 1) + CurrentChar - '0';     //Multiply by 10
+        Number = (Number << 3) + (Number << 1) + (CurrentChar - '0');   //Multiply by 10
         CurrentChar = getchar_unlocked();                               //Read the next char
     }
 
