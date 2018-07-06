@@ -7,7 +7,6 @@
 typedef long long lli;
 
 
-
 int main() {        
 
     int n;

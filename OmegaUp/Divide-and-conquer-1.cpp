@@ -2,12 +2,9 @@
 ==========         LARGEST SUM CONTIGOUS SUBARRAY      ===========
 ================================================================*/
 
-
-
 #include <vector>                                                       //Include Libraries
 #include <stdio.h>                                                      //Include Libraries
 using namespace std;                                                    //Bad practice
-
 
 inline void getNumber(long long int &Number) {
     
