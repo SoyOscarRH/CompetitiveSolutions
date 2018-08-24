@@ -14,6 +14,20 @@
         "vector": "cpp",
         "__locale": "cpp",
         "ios": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "__config": "cpp",
+        "cstddef": "cpp",
+        "exception": "cpp",
+        "new": "cpp",
+        "stdexcept": "cpp",
+        "typeinfo": "cpp",
+        "cctype": "cpp",
+        "cmath": "cpp",
+        "cstdint": "cpp",
+        "cstdio": "cpp",
+        "cstdlib": "cpp",
+        "cwchar": "cpp",
+        "cwctype": "cpp",
+        "type_traits": "cpp"
     }
 }
