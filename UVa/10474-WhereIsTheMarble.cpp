@@ -32,11 +32,11 @@ int main () {
         if (NumberOfMarbles == 0 and Queries == 0) return 0;
 
         vector<int> Marbles(NumberOfMarbles);
-        for(size_t i = 0; i < NumberOfMarbles; i++) cin >> Marbles[i];
+        for (size_t i = 0; i < NumberOfMarbles; i++) cin >> Marbles[i];
         sort(Marbles.begin(), Marbles.end());
         
         cout << "CASE# " << cases++ << ":\n";
-        for(int query = 0; query < Queries; query++) {
+        for (int query = 0; query < Queries; query++) {
             int number;
             cin >> number;
 
