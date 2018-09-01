@@ -1,7 +1,26 @@
 #include <iostream>
 #include <iomanip>
 #include <cmath>
+#include <functional>
 using namespace std;
+using uint = unsigned int;
+
+
+template <typename domain>
+domain ContinuousBinarySearch(
+   const function<domain(domain)> &f, uint iterations, domain left, domain right, domain toFind) { 
+    
+    domain middle;
+
+    while (iterations--) {
+        middle = left + (right - left) / 2;
+
+        if (f(middle) > toFind) left = middle;
+        else right = middle;
+    }
+
+    return (left + right) / 2;
+}
 
 
 pair<bool, double> findSolution(double p, double q, double r, double s, double t, double u) {
@@ -12,22 +31,7 @@ pair<bool, double> findSolution(double p, double q, double r, double s, double t
 
     if (evaluate(0) * evaluate(1) > 0) return {false, 0.0f};
 
-    double left = 0, right = 1;
-    bool first_is_negative = evaluate(0) < 0;
-
-    for (int i = 0; i < 100; i++) {
-        double middle = (left + right) / 2;
-        double middle_result = evaluate(middle);
-        
-        if (first_is_negative) {
-            if (middle_result < 0) left = middle;
-            else right = middle;
-        }
-        else {
-            if (middle_result < 0) right = middle;
-            else left = middle;                        
-        }
-    }
+    double left = ContinuousBinarySearch<double>(evaluate, 100, 0.0, 1.0, 0.0);
 
     return {true, left};
 };
@@ -46,4 +50,3 @@ int main () {
 
     return 0;
 }
-

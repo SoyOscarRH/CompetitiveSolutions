@@ -29,6 +29,10 @@
         "cwchar": "cpp",
         "cwctype": "cpp",
         "type_traits": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "algorithm": "cpp",
+        "queue": "cpp",
+        "array": "cpp",
+        "chrono": "cpp"
     }
 }
