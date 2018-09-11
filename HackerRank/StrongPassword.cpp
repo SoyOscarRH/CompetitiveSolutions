@@ -1,3 +1,7 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
 int minimumNumber(int n, string& password) {
     bool haveLower{}, haveUpper{}, haveNumber{}, haveSpecial{}; 
     for (auto& character : password) {
@@ -25,9 +29,5 @@ int minimumNumber(int n, string& password) {
 
     if (moreNecesaryCharacters + n <= 6) return  6 - n;
 
-    cout << haveLower << endl;
-    cout << haveUpper << endl;
-    cout << haveNumber << endl;
-    cout << haveSpecial << endl;
     return moreNecesaryCharacters;
 }
