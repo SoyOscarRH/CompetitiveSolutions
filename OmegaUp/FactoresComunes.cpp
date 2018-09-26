@@ -27,7 +27,7 @@ int main() {
 	cin >> a >> b;
 
     auto x = __gcd(a, b);
-    cout << getDivisors(x) << endl;
+    cout << countDivisors(x) << endl;
 
 
 }
