@@ -1,4 +1,3 @@
-
 #include<vector>
 #include<unordered_map>
 #include<unordered_set>
@@ -11,6 +10,7 @@ using listNums = vector<num>;
 
 const num LIKE {1}, HATE {2};
 const int RESET {-1};
+const num allPossible {1000000000000000000ull};
 
 using namespace std;
 int main() {
@@ -31,7 +31,10 @@ int main() {
         for (num i = 0; i < numberOfInputs; ++i) {
             cin >> input;
             if (type == LIKE) allNumberThatWeTalked[input]++;
-            else if (type == HATE) allNumberThatWeTalked[input] = RESET, AllTheHated.push_back(input);
+            else if (type == HATE) {
+                allNumberThatWeTalked[input] = RESET;
+                AllTheHated.push_back(input);
+            }
         }
 
         if (type == LIKE) lovers++;
@@ -39,7 +42,6 @@ int main() {
     }
 
     if (haters == numberOfFriends) {
-        num allPossible {10000000000000000000ull};
         unordered_set<num> reallyHated {};
         for (auto hated : AllTheHated) {
             reallyHated.insert(hated);
