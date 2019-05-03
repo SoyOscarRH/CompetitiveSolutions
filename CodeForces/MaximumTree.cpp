@@ -4,7 +4,6 @@
 #include <iostream>
 #include <cstdint>
 
-
 int main() {
     using namespace std;
 
