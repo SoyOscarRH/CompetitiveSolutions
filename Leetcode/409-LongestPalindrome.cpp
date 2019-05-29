@@ -6,7 +6,7 @@ int longestPalindrome(string& data) {
     bitset<256> seen {};
     
     int count {};
-    for(char letter : data){
+    for (char letter : data){
         if (seen[letter]) count++;
         seen.flip(letter);
     }
