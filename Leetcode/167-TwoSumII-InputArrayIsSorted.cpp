@@ -1,12 +1,11 @@
 #include <iostream>
-#include <vector>
 #include <map>
+#include <vector>
 
 using namespace std;
-
-auto twoSum(const vector<int> &numbers, int target) -> vector<int> {
+auto twoSum(const vector<int> numbers, int target) -> vector<int> {
   int i, j {};
-  for (auto it{numbers.begin()}, end{numbers.end()}; it != end; ++it) {
+  for (auto it {numbers.begin()}, end {numbers.end()}; it != end; ++it) {
     const auto toFind = target - *it;
     const auto result = lower_bound(it + 1, end, toFind);
 
