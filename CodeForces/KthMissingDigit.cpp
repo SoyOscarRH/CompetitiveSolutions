@@ -7,13 +7,13 @@
 
 using namespace std;
 
-int digitSum(const string& number) {
+template <typename T>
+int digitSum(T&& number) {
   uint64_t sum {};
   for (char digit : number) sum += (digit - '0');
   if (sum < 10) return sum;
 
-  auto nextStep = to_string(sum);
-  return digitSum(nextStep);
+  return digitSum(to_string(sum));
 }
 
 int main() {
