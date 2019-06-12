@@ -1,35 +1,36 @@
-#include <vector>
-#include <iostream>
 #include <cstdint>
+#include <iostream>
+#include <vector>
 
 using namespace std;
- 
 
 int main() {
-    // No merge cin/cout with scanf/printf
-    ios::sync_with_stdio(false);   
+  // No merge cin/cout with scanf/printf
+  ios::sync_with_stdio(false);
 
-    // This unties cin from cout
-    cin.tie(nullptr);
-    cout.tie(nullptr);
+  // This unties cin from cout
+  cin.tie(nullptr);
+  cout.tie(nullptr);
 
-	int n;
-	cin >> n;
+  int n;
+  cin >> n;
 
-	string data;
-	data.reserve(n);
-	cin >> data;
+  string word;
+  word.reserve(n);
+  cin >> word;
 
-	vector<int> cubeta(256, 0);
-	for (auto letter : data) ++cubeta[letter];
-	
-	int indexGeneral {-1};
-	for (int letter = 'a'; letter <= 'z'; ++letter) {
-		for (int i = 0; i < cubeta[letter]; ++i) {
-			data[++indexGeneral] = letter;
-		}
-	}
+  vector<int> numOfTimesLetterAppear(256, 0);
+  for (auto letter : word) {
+    ++numOfTimesLetterAppear[letter];
+  }
 
-	cout << data << "\n";
-  	return 0;
+  for (char letter = 'a'; letter <= 'z'; ++letter) {
+    const int numTimesALetterAppeared = numOfTimesLetterAppear[letter];
+    for (int i = 0; i < numTimesALetterAppeared; ++i) {
+      cout << letter;
+    }
+  }
+
+  cout << endl;
+  return 0;
 }
