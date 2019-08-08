@@ -11,11 +11,11 @@ auto maxSubsetSum(const vector<int> data) -> int {
   auto bestUntilLast = max(data[0], data[1]);
 
   for (auto i = size_t {2}; i < data.size(); ++i) {
-    const auto current = data[i], temporal = bestUntilLast;
-    const auto options = {current, bestUntilLast,
-                          bestUntilPenultimate + current};
+    const auto bestOption =
+        max({data[i], bestUntilLast, bestUntilPenultimate + data[i]});
 
-    bestUntilLast = max(options), bestUntilPenultimate = temporal;
+    bestUntilPenultimate = bestUntilLast;
+    bestUntilLast = bestOption;
   }
 
   return bestUntilLast;
