@@ -7,15 +7,18 @@ using namespace std;
 
 auto maxSubsetSum(const vector<int> data) -> int {
   // We start at index = 2
-  auto takeOneBeforeLast = data[0], takeLast = max(data[0], data[1]);
+  auto bestUntilPenultimate = data[0];
+  auto bestUntilLast = max(data[0], data[1]);
 
-  for (auto i = 2; i < data.size(); ++i) {
-    const auto current = data[i], temporal = takeLast;
-    takeLast = max({current, takeLast, takeOneBeforeLast + current});
-    takeOneBeforeLast = temporal;
+  for (auto i = size_t {2}; i < data.size(); ++i) {
+    const auto current = data[i], temporal = bestUntilLast;
+    const auto options = {current, bestUntilLast,
+                          bestUntilPenultimate + current};
+
+    bestUntilLast = max(options), bestUntilPenultimate = temporal;
   }
 
-  return takeLast;
+  return bestUntilLast;
 }
 
 int main() {
