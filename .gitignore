@@ -5,3 +5,8 @@
 .DS_Store
 **/.DS_Store
 *.DS_Store 
+
+# Test cases
+.input
+**/.input
+*.input
