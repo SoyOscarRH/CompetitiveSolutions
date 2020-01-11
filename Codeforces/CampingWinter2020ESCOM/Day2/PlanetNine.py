@@ -1,25 +1,20 @@
-start, end = input().split()
+start, end = map(int, input().split())
+
+safe_sum_one = 1
+while safe_sum_one <= end:
+    safe_sum_one *= 10
+ones = 0
+
+while end < start or start % 9 != end % 9:
+    end += safe_sum_one
+    safe_sum_one *= 10
+    ones += 1
+
+nines = (end - start) // 9
 result = []
 
-for index, digit in enumerate(start):
-    if digit == '1':
-        result.append("- 1")
-    elif digit != '0':
-        fix_digit = 11 - int(digit)
-        num_ones = 9 - fix_digit
-        zeros_to_place = '0' * (len(start) - index - 1)
-        final_num = ('1' * num_ones + '0') + str(fix_digit) + zeros_to_place
-        result.append(f"+ {int(final_num) // 9}")
-        result.append(f"- {num_ones + 2}")
-
-for index, digit in enumerate(reversed(end)):
-    if digit == '9':
-        result.append("+ 1")
-    elif digit != '0':
-        num_ones = 9 - int(digit)
-        final_num = ('1' * num_ones) + digit + ('0' * index)
-        result.append(f"+ {int(final_num) // 9}")
-        result.append(f"- {num_ones}")
+if nines > 0: result.append(f"+ {nines}") 
+if ones > 0: result.append(f"- {ones}") 
 
 print("Stable")
 print(len(result))
