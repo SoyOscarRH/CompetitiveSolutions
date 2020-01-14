@@ -21,8 +21,12 @@ for index, digit in enumerate(reversed(end)):
         result.append(f"+ {int(final_num) // 9}")
         result.append(f"- {num_ones}")
 
-print("Stable")
-print(len(result))
+operations = len(result)
+if (operations > 1000):
+    print("Broken")
+else:
+    print("Stable")
+    print(operations)
 
-for line in result:
-    print(line)
+    for line in result:
+        print(line)
