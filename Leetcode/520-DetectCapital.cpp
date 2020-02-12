@@ -1,14 +1,16 @@
 class Solution {
  public:
   auto detectCapitalUse(const string& word) -> bool {
-    if (word.size() < 2) return true;
+    const auto is_capital = [](char x) { return 'A' <= x and x <= 'Z'; };
 
-    const auto capital = [](char x) { return 'A' <= x and x <= 'Z'; };
-    if (not capital(word[0]) and capital(word[1])) return false;
+    const auto num_capitals =
+        count_if(begin(word), end(word),
+                 [=](char letter) { return is_capital(letter); });
 
-    const auto second = capital(word[1]);
+    if (word.size() == num_capitals) return true;
+    if (num_capitals == 0) return true;
+    if (num_capitals == 1 and is_capital(word[0])) return true;
 
-    return all_of(begin(word) + 1, end(word),
-                  [=](auto x) { return capital(x) == second; });
+    return false;
   }
 };
