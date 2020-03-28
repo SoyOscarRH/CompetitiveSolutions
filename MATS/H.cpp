@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <iostream>
 #include <numeric>
+#include <set>
 #include <vector>
 
 using namespace std;
@@ -15,8 +16,9 @@ auto main() -> int {
   num cows_allow, num_farms, num_visits;
   cin >> cows_allow >> num_farms >> num_visits;
 
+  num buffer;
   auto farms = vector<num>(cows_allow + 1);
-  for (num i = 0, buffer = 0; i < num_farms; ++i) {
+  for (num i = 0; i < num_farms; ++i) {
     cin >> buffer;
     ++farms[buffer];
   }
@@ -24,13 +26,11 @@ auto main() -> int {
   auto days = vector<int>(num_visits);
   for (auto& d : days) cin >> d;
 
-  const auto last = days[days.size() - 1];
-  for (auto i = 0, index = 0; i <= last; ++i) {
-    if (i == days[index]) {
-      cout << accumulate(begin(farms) + 1, end(farms), num{}) << endline;
-      ++index;
-    }
+  const auto last = *max_element(begin(days), end(days));
 
+  auto result = vector<num>(last + 1);
+  for (auto day = 0; day <= last; ++day) {
+    result[day] = accumulate(begin(farms) + 1, end(farms), num {});
     auto farms_future = vector<num>(cows_allow + 1);
 
     for (num num_cows = 1; num_cows <= cows_allow; ++num_cows) {
@@ -49,6 +49,10 @@ auto main() -> int {
     }
 
     farms = std::move(farms_future);
+  }
+
+  for (auto d : days) {
+    cout << result[d] << endline;
   }
 
   return 0;
