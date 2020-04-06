@@ -1,29 +1,26 @@
 class Solution {
  public:
-  auto get_encoded_count(const string& word) {
-    array<char, 26> count {};
-    for (const auto character : word) ++count[character - 'a'];
+  auto get_encoded_count(const string& word) -> string {
+    array<char, 26> how_many_at {};
+    for (const auto character : word) ++how_many_at[character - 'a'];
 
-    auto result = string {};
-    auto letter = 'a' - 1;
-    for (const auto& current : count) {
+    auto encoded = string {};
+    auto letter = 'a';
+    for (const auto& current : how_many_at) {
+      if (current) encoded.append({letter, current, '#')};
       ++letter;
-      if (not current) continue;
-      result += letter;
-      result += current;
-      result += '#';
     }
 
-    return result;
+    return encoded;
   }
 
   auto groupAnagrams(vector<string>& words) -> vector<vector<string>> {
     auto seen = unordered_map<string, vector<string>> {};
-    for (auto word : words)
-      seen[get_encoded_count(word)].emplace_back(std::move(word));
+    for (const auto word& : words)
+      seen[get_encoded_count(word)].push_back(word);
 
     auto result = vector<vector<string>> {};
-    for (auto& item : seen) result.emplace_back(std::move(item.second));
+    for (auto& [_, list] : seen) result.emplace_back(move(list));
 
     return result;
   }
