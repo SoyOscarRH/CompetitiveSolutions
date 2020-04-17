@@ -1,54 +1,41 @@
 class Solution {
+  struct point { int x, y; };
+  static constexpr array<point, 4> moves {{{0, 1}, {0, -1}, {1, 0}, {-1, 0}}};
+
  public:
-  using matrix = vector<vector<char>>;
+  inline auto is_ok(int x, int y, int n, int m) -> bool {
+    return (0 <= x and x < n) and (0 <= y and y < m);
+  }
 
-  int m, n;
-
-  vector<pair<int, int>> moves = {
-      {1, 0},   // left
-      {-1, 0},  // right
-      {0, 1},   // up
-      {0, -1},  // down
-  };
-
-  auto remove_adjacent(matrix& grid, const int i, const int j) -> void {
-    auto to_check = queue<pair<int, int>> {{{i, j}}};
-
-    while (not to_check.empty()) {
-      auto current = to_check.front();
-      to_check.pop();
-
-      for (const auto [xi, yi] : moves) {
-        auto [x, y] = current;
-
-        x += xi;
-        y += yi;
-        if (x < 0 or x >= m) continue;
-        if (y < 0 or y >= n) continue;
-        if (grid[x][y] != '1') continue;
-
-        grid[x][y] = '0';
-        to_check.push({x, y});
+  inline auto fillIsland(vector<vector<char>>& grid, const point& p) -> void {
+    auto to_visit = stack<point> {{p}};
+    const auto n = grid.size(), m = grid[0].size();
+    while (not to_visit.empty()) {
+      const auto [x, y] = to_visit.top();
+      to_visit.pop();
+      for (const auto delta : moves) {
+        const auto dx = x + delta.x, dy = y + delta.y;
+        if (is_ok(dx, dy, n, m) and grid[dx][dy] == '1') {
+          grid[dx][dy] = '0';
+          to_visit.push({dx, dy});
+        }
       }
     }
   }
 
-  int numIslands(matrix& grid) {
-    m = grid.size(), n = m ? grid[0].size() : 0;
-    if (not n) return 0;
+  auto numIslands(vector<vector<char>> grid) -> int {
+    if (not grid.size()) return 0;
+    const auto n = grid.size(), m = grid[0].size();
+    auto result = 0;
 
-    auto islands = 0;
-
-    for (int i = 0; i < m; i++) {
-      for (int j = 0; j < n; j++) {
-        if (grid[i][j] == '1') {
-          grid[i][j] = '0';
-          islands++;
-          remove_adjacent(grid, i, j);
-        }
+    for (auto i = 0; i < n; ++i) {
+      for (auto j = 0; j < m; ++j) {
+        if (grid[i][j] == '0') continue;
+        fillIsland(grid, {i, j});
+        ++result;
       }
     }
 
-    return islands;
+    return result;
   }
 };
