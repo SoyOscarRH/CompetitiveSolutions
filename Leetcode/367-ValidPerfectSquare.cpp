@@ -9,8 +9,7 @@ struct Solution {
       if (mid < num / mid) left = mid + 1;
       else  right = mid - 1;
     }
-    return false;
 
     return false;
   }
-}
+};
