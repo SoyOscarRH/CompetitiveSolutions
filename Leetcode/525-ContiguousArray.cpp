@@ -1,22 +1,24 @@
-class Solution {
- public:
+struct Solution {
   auto findMaxLength(const vector<int>& nums) -> int {
-    const auto n = nums.size();
-    auto sum_considering = vector<int>(n + 1, 0);
+    auto memo = unordered_map<int, int> {};
+    auto longest_contiguous = 0, sum = 0;
+    for (auto i = 0; i < nums.size(); ++i) {
+      sum += (nums[i] == 0) ? -1 : 1;
+      if (sum == 0) {
+        longest_contiguous = max(longest_contiguous, i + 1);
+        continue;
+      }
 
-    auto last_seen = unordered_map<int, int> {};
-    for (auto i = 1; i <= n; ++i) {
-      sum_considering[i] = sum_considering[i - 1] + (nums[i - 1] ? 1 : -1);
-      last_seen[sum_considering[i]] = i;
+      auto it = memo.find(sum);
+      if (it == end(memo)) {
+        memo[sum] = i;
+        continue;
+      }
+
+      const auto [_, start] = *it;
+      longest_contiguous = max(longest_contiguous, i - start);
     }
 
-    auto result = 0;
-    for (auto begin = 0; begin < n; ++begin) {
-      const auto end = last_seen[sum_considering[begin]];
-      const auto size = end - begin;
-      if (size > result) result = size;
-    }
-
-    return result;
+    return longest_contiguous;
   }
 };
