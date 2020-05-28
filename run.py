@@ -1,14 +1,12 @@
-import os
 import sys
+import os
 
 filename = sys.argv[1]
-optimization = "-O2"
-version = "c++14"
+name, extension = os.path.splitext(filename)
 
 flags = " ".join([
-    "-Wall", "-Wextra", "-Wshadow",  "-Wpedantic",
+    "-std=c++14", "-O2", "-Wall", "-Wextra", "-Wshadow",  "-Wpedantic",
     "-fsanitize=undefined", "-fsanitize=address"])
 
-compile = f"g++ {filename} -std={version} {optimization} {flags}"
-# print(compile)
+compile = f"g++ {filename} {flags} -o {name}"
 os.system(compile)
