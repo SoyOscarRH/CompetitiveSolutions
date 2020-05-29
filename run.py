@@ -8,5 +8,5 @@ flags = " ".join([
     "-std=c++14", "-O2", "-Wall", "-Wextra", "-Wshadow",  "-Wpedantic",
     "-fsanitize=undefined", "-fsanitize=address"])
 
-compile = f"g++ {filename} {flags} -o {name}"
+compile = f"g++ {filename} {flags} -o {name}.out"
 os.system(compile)
