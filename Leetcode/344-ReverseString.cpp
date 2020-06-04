@@ -1,12 +1,9 @@
-class Solution {
- public:
-  void reverseString(vector<char>& data) {
-    int start = 0, end = data.size() - 1;
+struct Solution {
+  auto reverseString(vector<char>& str) -> void {
+    int start = 0, end = str.size() - 1;
 
     while (start < end) {
-      swap(data[start], data[end]);
-      ++start;
-      --end;
+      swap(str[start++], str[end--]);
     }
   }
 };
