@@ -1,0 +1,12 @@
+struct Solution {
+  auto numSquares(int n) -> int {
+    auto dp = vector<int> {0};
+    while (dp.size() <= n) {
+      int m = dp.size(), squares = INT_MAX;
+      for (int i = 1; i * i <= m; ++i) squares = min(squares, dp[m - i * i] + 1);
+      dp.push_back(squares);
+    }
+
+    return dp[n];
+  }
+};
