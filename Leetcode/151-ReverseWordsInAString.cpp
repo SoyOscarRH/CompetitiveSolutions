@@ -1,8 +1,8 @@
-class Solution {
- public:
+struct Solution {
   auto reverseWords(const string& message) -> string {
+    auto current = static_cast<int>(message.size() - 1);
     auto result = string {};
-    auto current = int {message.size() - 1};
+    result.reserve(message.size());
 
     while (current >= 0) {
       // move to the start of word
