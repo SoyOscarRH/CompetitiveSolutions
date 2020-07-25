@@ -8,8 +8,7 @@ class Solution {
     auto current = intervals[0];
     auto result = vector<interval_t> {};
     for (const auto& interval : intervals) {
-      if (current[1] >= interval[0])
-        current[1] = max(interval[1], current[1]);
+      if (current[1] >= interval[0]) current[1] = max(interval[1], current[1]);
       else {
         result.emplace_back(current);
         current = interval;
