@@ -9,10 +9,9 @@ class Solution {
       if (words[0].size() == index) return prefix;
       const auto letter_to_add = words[0][index];
 
-      const auto all =
-          std::all_of(begin(words), end(words), [=](const auto& word) {
-            return word.size() != index and word[index] == letter_to_add;
-          });
+      const auto all = std::all_of(begin(words), end(words), [=](const auto& word) {
+        return word.size() != index and word[index] == letter_to_add;
+      });
 
       if (not all) return prefix;
 
