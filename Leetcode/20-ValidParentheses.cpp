@@ -11,8 +11,7 @@ class Solution {
     auto to_close = stack<char> {};
     for (const auto character : data) {
       const int val = symbols[character];
-      if (to_close.size() and character == to_close.top())
-        to_close.pop();
+      if (to_close.size() and character == to_close.top()) to_close.pop();
       else if (val != 0)
         to_close.push(val);
       else
