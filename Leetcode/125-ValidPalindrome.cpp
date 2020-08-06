@@ -1,15 +1,20 @@
 class Solution {
+  inline auto next_valid(const string& s, int i) -> int {
+    while (i < s.size() and not isalnum(s[i])) ++i;
+    return i;
+  }
+  inline auto prev_valid(const string& s, int i) -> int {
+    while (i >= 0 and not isalnum(s[i])) --i;
+    return i;
+  }
+
  public:
   auto isPalindrome(const string& s) -> bool {
-    auto left = begin(s), right = end(s) - 1;
+    int l = 0, r = s.size() - 1;
 
-    for (; left < right; ++left, --right) {
-      while (left < end(s) and not isalnum(*left)) ++left;
-      while (right >= begin(s) and not isalnum(*right)) --right;
-
-      if (left >= end(s) or right < begin(s)) return true;
-
-      if (tolower(*left) != tolower(*right)) return false;
+    while (l < r) {
+      l = next_valid(s, l + 1), r = prev_valid(s, r - 1);
+      if (tolower(s[l]) != tolower(s[r])) return false;
     }
 
     return true;
