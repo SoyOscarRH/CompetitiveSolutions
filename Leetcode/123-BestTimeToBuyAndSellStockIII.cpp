@@ -8,10 +8,15 @@ struct Solution {
     profit[current][one_buy_one_sell] = profit[current][two_buys_two_sells] = 0;
 
     for (const auto price : prices) {
-      profit[next][one_buy] = max(profit[current][one_buy], 0 - price);
-      profit[next][one_buy_one_sell] = max(profit[current][one_buy_one_sell], profit[current][one_buy] + price);
-      profit[next][two_buys_one_sell] = max(profit[current][two_buys_one_sell], profit[current][one_buy_one_sell] - price);
-      profit[next][two_buys_two_sells] = max(profit[current][two_buys_two_sells], profit[current][two_buys_one_sell] + price);
+      profit[next][one_buy] = 
+          max(profit[current][one_buy], 0 - price);
+      profit[next][one_buy_one_sell] =
+          max(profit[current][one_buy_one_sell], profit[current][one_buy] + price);
+      profit[next][two_buys_one_sell] =
+          max(profit[current][two_buys_one_sell], profit[current][one_buy_one_sell] - price);
+      profit[next][two_buys_two_sells] =
+          max(profit[current][two_buys_two_sells], profit[current][two_buys_one_sell] + price);
+          
       swap(next, current);
     }
 
