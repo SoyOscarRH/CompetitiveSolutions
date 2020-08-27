@@ -1,5 +1,6 @@
 class Solution {
-  auto pathSumWorker(TreeNode* const root, const int sum, int& ways, const bool parent_used) -> void {
+  auto pathSumWorker(TreeNode* const root, const int sum, int& ways, const bool parent_used)
+      -> void {
     if (not root) return;
     if (sum == root->val) ways++;
 
