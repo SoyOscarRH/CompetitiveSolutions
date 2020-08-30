@@ -14,18 +14,3 @@ struct Solution {
   }
 };
 
-auto pancakeSort(vector<int> input) -> vector<int> {
-  auto output = vector<int> {};
-  int x, i;
-  for (x = input.size(); x > 0; --x) {
-    for (i = 0; input[i] != x; ++i) {}
-
-    reverse(begin(input), begin(input) + i + 1);
-    output.push_back(i + 1);
-
-    reverse(begin(input), begin(input) + x);
-    output.push_back(x);
-  }
-
-  return output;
-}
