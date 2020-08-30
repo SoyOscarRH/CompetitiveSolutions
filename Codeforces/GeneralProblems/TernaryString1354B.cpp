@@ -1,7 +1,7 @@
+#include <algorithm>
 #include <array>
 #include <cstdint>
 #include <iostream>
-#include <algorithm>
 #include <string>
 
 using namespace std;
