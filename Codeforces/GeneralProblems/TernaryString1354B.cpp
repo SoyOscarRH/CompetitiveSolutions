@@ -38,6 +38,7 @@ auto size_of_min_substring_with_123(const string& input) -> num {
 }
 
 auto main() -> int {
+  ios::sync_with_stdio(false);
   auto tests = 0;
   cin >> tests;
   auto buffer = string {};
