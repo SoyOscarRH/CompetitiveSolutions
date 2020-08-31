@@ -7,28 +7,34 @@
 using namespace std;
 
 using num = int;
-const auto invalid = numeric_limits<num>::max();
 
+inline auto get_minmax_of_3_elements(const num x, const num y, const num z) -> pair<num, num> {
+  const auto [maybe_min, maybe_max] = minmax(x, y);
+  return {min(maybe_min, z), max(maybe_max, z)};
+}
+
+const auto big_and_invalid_num = numeric_limits<num>::max();
 auto size_of_min_substring_with_123(const string& input) -> num {
-  int one = 0, two = 0, three = 0;
-  auto size_of_min = invalid;
+  int last_time_i_saw_1 = 0, last_time_i_saw_2 = 0, last_time_i_saw_3 = 0;
+  auto size_of_min_valid_substring = big_and_invalid_num;
 
   for (num i = 0; i < input.size(); ++i) {
-    if (input[i] == '1') one = i + 1;
-    if (input[i] == '2') two = i + 1;
-    if (input[i] == '3') three = i + 1;
+    if (input[i] == '1') last_time_i_saw_1 = i + 1;
+    if (input[i] == '2') last_time_i_saw_2 = i + 1;
+    if (input[i] == '3') last_time_i_saw_3 = i + 1;
 
-    if (one and two and three) {
-      const auto [maybe_min, maybe_max] = minmax(one, two);
-      const auto str_size = max(maybe_max, three) - min(maybe_min, three) + 1;
-
-      size_of_min = min(size_of_min, str_size);
+    if (last_time_i_saw_1 and last_time_i_saw_2 and last_time_i_saw_3) {
+      const auto [begin_of_substr, end_of_substr] =
+          get_minmax_of_3_elements(last_time_i_saw_1, last_time_i_saw_2, last_time_i_saw_3);
+      
+      const auto candidate_substring_size = end_of_substr - begin_of_substr + 1;
+      size_of_min_valid_substring = min(size_of_min_valid_substring, candidate_substring_size);
     }
   }
 
-  if (size_of_min == invalid) { return 0; }
+  if (size_of_min_valid_substring == big_and_invalid_num) { return 0; }
 
-  return size_of_min;
+  return size_of_min_valid_substring;
 }
 
 auto main() -> int {
