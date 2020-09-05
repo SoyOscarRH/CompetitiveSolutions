@@ -1,41 +1,43 @@
 class Solution {
-  enum class orange { empty = 0, fresh = 1, rooten = 2 };
-  vector<pair<int, int>> moves {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+  enum class element { empty = 0, fresh_orange = 1, rooten_orange = 2 };
+  static constexpr array<pair<int, int>, 4> moves = {{{1, 0}, {-1, 0}, {0, 1}, {0, -1}}};
 
  public:
   auto orangesRotting(vector<vector<int>>& grid) -> int {
-    const int x = grid.size(), y = grid[0].size();
+    const auto n = grid.size(), m = grid[0].size();
 
-    auto rooten_to_check = queue<pair<int, int>> {};
-    auto num_oranges = 0;
-    for (auto i = 0; i < x; ++i) {
-      for (auto j = 0; j < y; ++j) {
-        if (static_cast<orange>(grid[i][j]) == orange::rooten) { rooten_to_check.emplace(i, j); }
-        if (static_cast<orange>(grid[i][j]) != orange::empty) { ++num_oranges; }
+    auto rooten_to_check = vector<pair<int, int>> {};
+    auto num_fresh_oranges = 0;
+    for (auto i = 0; i < n; ++i) {
+      for (auto j = 0; j < m; ++j) {
+        const auto current = static_cast<element>(grid[i][j]);
+        if (current == element::rooten_orange) { rooten_to_check.emplace_back(i, j); }
+        if (current == element::fresh_orange) { ++num_fresh_oranges; }
       }
     }
 
-    auto days = 0;
-    while (not rooten_to_check.empty()) {
-      auto num_to_check = rooten_to_check.size();
-      for (auto k = 0; k < num_to_check; ++k) {
-        auto [i, j] = rooten_to_check.front();
-        rooten_to_check.pop();
-        num_oranges--;
+    if (num_fresh_oranges == 0) return 0;
 
-        for (const auto [di, dj] : moves) {
-          const auto i2 = i + di, j2 = j + dj;
-          if (i2 < 0 or i2 >= x or j2 < 0 or j2 >= y) continue;
-          auto& current = grid[i2][j2];
-          if (static_cast<orange>(current) == orange::fresh) {
-            current = static_cast<int>(orange::rooten);
-            rooten_to_check.emplace(i2, j2);
+    auto num_days = 0;
+    while (not rooten_to_check.empty()) {
+      auto rooten_to_check_next_day = vector<pair<int, int>> {};
+
+      for (const auto [i, j] : rooten_to_check) {
+        for (const auto [move_in_i, move_in_j] : moves) {
+          const auto di = i + move_in_i, dj = j + move_in_j;
+          if (di < 0 or di >= n or dj < 0 or dj >= m) continue;
+          if (static_cast<element>(grid[di][dj]) == element::fresh_orange) {
+            grid[di][dj] = static_cast<int>(element::rooten_orange);
+            rooten_to_check_next_day.emplace_back(di, dj);
+            num_fresh_oranges--;
           }
         }
       }
-      ++days;
+
+      rooten_to_check = move(rooten_to_check_next_day);
+      ++num_days;
     }
 
-    return (num_oranges == 0)? max(0, days - 1) : -1;
+    return num_fresh_oranges == 0 ? num_days - 1 : -1;
   }
 };
