@@ -1,18 +1,8 @@
-class Solution {
- public:
-  array<int, 256> symbols_value;
+struct Solution {
+  unordered_map<char, int> symbols_value {{'I', 1},   {'V', 5},   {'X', 10},  {'L', 50},
+                                          {'C', 100}, {'D', 500}, {'M', 1000}};
 
-  Solution() {
-    symbols_value['I'] = 1;
-    symbols_value['V'] = 5;
-    symbols_value['X'] = 10;
-    symbols_value['L'] = 50;
-    symbols_value['C'] = 100;
-    symbols_value['D'] = 500;
-    symbols_value['M'] = 1000;
-  }
-
-  int romanToInt(const string roman_number) {
+  auto romanToInt(const string& roman_number) -> int {
     auto result = 0;
     auto last_value = symbols_value[roman_number[0]];
 
