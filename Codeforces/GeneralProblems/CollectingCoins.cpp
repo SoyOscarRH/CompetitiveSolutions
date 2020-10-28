@@ -28,9 +28,3 @@ auto main() -> int {
 
   return 0;
 }
-
-auto birthdayCakeCandles(const vector<int> candles) -> int {
-  const auto tallest_candle = *max_element(begin(candles), end(candles));
-  return count_if(begin(candles), end(candles),
-                  [tallest_candle](const int candle) { return candle == tallest_candle; });
-}
