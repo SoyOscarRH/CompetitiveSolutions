@@ -8,11 +8,6 @@ using namespace std;
 
 using num = int;
 
-inline auto get_minmax_of_3_elements(const num x, const num y, const num z) -> pair<num, num> {
-  const auto [maybe_min, maybe_max] = minmax(x, y);
-  return {min(maybe_min, z), max(maybe_max, z)};
-}
-
 const auto big_and_invalid_num = numeric_limits<num>::max();
 auto size_of_min_substring_with_123(const string& input) -> num {
   int last_time_i_saw_1 = 0, last_time_i_saw_2 = 0, last_time_i_saw_3 = 0;
@@ -25,7 +20,7 @@ auto size_of_min_substring_with_123(const string& input) -> num {
 
     if (last_time_i_saw_1 and last_time_i_saw_2 and last_time_i_saw_3) {
       const auto [begin_of_substr, end_of_substr] =
-          get_minmax_of_3_elements(last_time_i_saw_1, last_time_i_saw_2, last_time_i_saw_3);
+          minmax({last_time_i_saw_1, last_time_i_saw_2, last_time_i_saw_3});
       
       const auto candidate_substring_size = end_of_substr - begin_of_substr + 1;
       size_of_min_valid_substring = min(size_of_min_valid_substring, candidate_substring_size);
