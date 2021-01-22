@@ -27,9 +27,7 @@ auto size_of_min_substring_with_123(const string& input) -> num {
     }
   }
 
-  if (size_of_min_valid_substring == big_and_invalid_num) { return 0; }
-
-  return size_of_min_valid_substring;
+  return (size_of_min_valid_substring != big_and_invalid_num)? size_of_min_valid_substring : 0;
 }
 
 auto main() -> int {
