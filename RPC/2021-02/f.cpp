@@ -20,12 +20,15 @@ auto main() -> int {
   for (auto i = 0; i < num_people; ++i) {
     cin >> values[i].value;
     values[i].original_id = i + 1;
+    --values[i].value;
   }
 
-  while (values.size() != 1) {
-    const auto times = values[0].value;
-    const auto chosen = times % values.size();
+  auto person_to_choose = 0;
+  for (int n = values.size(); n != 1; --n) {
+    const auto times = values[person_to_choose].value;
+    const auto chosen = (person_to_choose + times) % n;
     values.erase(begin(values) + chosen);
+    person_to_choose = chosen % (n - 1);
   }
 
   cout << values[0].original_id << endl;

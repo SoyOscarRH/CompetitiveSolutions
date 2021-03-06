@@ -31,8 +31,7 @@ auto is_possible(const double speed, const vector<book>& books) -> int {
 
 auto find_min_possible(const vector<book>& books) -> num {
   int low = 1;
-  int high = 10 + accumulate(begin(books), end(books), 0,
-                             [](const int i, const book b1) { return b1.pages + i; });
+  int high = numeric_limits<int>::max();
 
   while (low <= high) {
     const auto current = low + (high - low) / 2;
