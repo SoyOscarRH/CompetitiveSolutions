@@ -23,7 +23,7 @@ auto size_of_min_substring_with_123(const string& input) -> num {
       const auto candidate_size = 1 + (last - first);
 
       if (not size_of_min_valid_substr) { size_of_min_valid_substr = candidate_size; }
-      size_of_min_valid_substr = min(size_of_min_valid_substr, candidate_size);
+      size_of_min_valid_substr = min(*size_of_min_valid_substr, candidate_size);
     }
   }
 
