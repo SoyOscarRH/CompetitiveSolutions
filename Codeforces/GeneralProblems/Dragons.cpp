@@ -14,10 +14,8 @@ auto main() -> int {
   auto dragons = vector<dragon_t>(num_dragons);
   for (auto& dragon : dragons) { cin >> dragon.strength >> dragon.bonus; }
 
-  sort(begin(dragons), end(dragons), [](const dragon_t d1, const dragon_t d2) {
-    if (d1.strength != d2.strength) { return d1.strength < d2.strength; }
-    return d1.bonus > d2.bonus;
-  });
+  sort(begin(dragons), end(dragons),
+       [](const dragon_t d1, const dragon_t d2) { return d1.strength < d2.strength; });
 
   const auto will_win_all =
       all_of(begin(dragons), end(dragons), [current_life = life](const dragon_t dragon) mutable {
