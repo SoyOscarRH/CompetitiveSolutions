@@ -1,14 +1,15 @@
 #include <iostream>
 using namespace std;
 
-auto special_nums_until(int64_t n) -> int64_t {
-  if (n < 10) return n;
+auto special_nums_until(const int64_t number) -> int64_t {
+  if (number < 10) return number;
 
-  const auto limit = n % 10;
-  auto count = (n / 10) + 9;
+  const auto string_representation = to_string(number);
+  const auto first_digit = string_representation.front();
+  const auto last_digit = string_representation.back();
 
-  while (n >= 10) { n /= 10; }
-  return (n > limit) ? count - 1 : count;
+  auto special_nums = (number / 10) + 9;
+  return (first_digit > last_digit) ? special_nums - 1 : special_nums;
 }
 
 auto main() -> int {
