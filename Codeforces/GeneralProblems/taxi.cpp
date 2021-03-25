@@ -14,48 +14,25 @@ auto main() -> int {
   for (const auto group : groups) { ++num_groups_of[group]; }
 
   auto taxis = 0;
+  taxis += num_groups_of[4];
   {
-    taxis += num_groups_of[4];
-    num_groups_of[4] = 0;
-  }
-
-  {
-    const auto taxi_3_1 = min(num_groups_of[3], num_groups_of[1]);
-    num_groups_of[3] -= taxi_3_1;
-    num_groups_of[1] -= taxi_3_1;
-
-    taxis += taxi_3_1;
     taxis += num_groups_of[3];
+    num_groups_of[1] -= num_groups_of[3];
   }
 
   {
-    const auto taxi_2_2 = num_groups_of[2] / 2;
+    taxis += num_groups_of[2] / 2;
 
-    taxis += taxi_2_2;
-    num_groups_of[2] -= taxi_2_2 * 2;
-
-    const auto taxi_2_1_1 = min(num_groups_of[2], num_groups_of[1] / 2);
-    taxis += taxi_2_1_1;
-
-    num_groups_of[2] -= taxi_2_1_1;
-    num_groups_of[1] -= taxi_2_1_1 * 2;
-
-    const auto taxi_2_1 = min(num_groups_of[2], num_groups_of[1]);
-    num_groups_of[2] -= taxi_2_1;
-    num_groups_of[1] -= taxi_2_1;
-
-    taxis += taxi_2_1;
-
-    taxis += num_groups_of[2];
+    const auto num_taxis_2_no_idea = num_groups_of[2] % 2;
+    taxis += num_taxis_2_no_idea;
+    num_groups_of[1] -= (num_taxis_2_no_idea * 2);
   }
 
-  {
-    const auto taxi_1_1_1_1 = num_groups_of[1] / 4;
-    taxis += taxi_1_1_1_1;
-    num_groups_of[1] -= taxi_1_1_1_1 * 4;
+  if (num_groups_of[1] > 0) {
+    const auto num_taxis_1111 = num_groups_of[1] / 4;
+    const auto num_taxis_just_ones = num_groups_of[1] % 4 != 0 ? 1 : 0;
 
-    const auto taxi_no_idea = num_groups_of[1] != 0 ? 1 : 0;
-    taxis += taxi_no_idea;
+    taxis += num_taxis_1111 + num_taxis_just_ones;
   }
 
   cout << taxis << endl;
