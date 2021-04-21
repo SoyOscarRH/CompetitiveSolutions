@@ -23,7 +23,8 @@ class queue_with_stack {
   auto pop() -> void { move_around(), sorted.pop(); }
 
   auto top() -> T {
-    move_around(), return sorted.top();
+    move_around();
+    return sorted.top();
   }
 };
 
